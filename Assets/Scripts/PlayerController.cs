@@ -15,14 +15,17 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        // Horizontal movement
         float moveInput = Input.GetAxis("Horizontal");
         rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
 
-        // Jumping
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlaySoundEffect(AudioManager.Instance.jumpSound);
+            }
         }
     }
 
